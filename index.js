@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 
 app.use(express.static('static'));
 
+app.get('/', (req, res) => res.send('<p>Remoteku Server</p>'));
+
 app.get('/api/herokuauth', async (req, res) => {
   // Device id in query param
   const { did } = req.query;
