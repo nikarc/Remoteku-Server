@@ -35,6 +35,7 @@ app.get('/api/herokuauth', async (req, res) => {
 });
 
 app.get(AUTH_CALLBACK, async (req, res) => {
+  console.log('AUTH CALLBACK CALLED');
   // Get code, state
   const { code, state } = req.query;
   // Swap token for oauth token
@@ -46,9 +47,19 @@ app.get(AUTH_CALLBACK, async (req, res) => {
       client_secret: HEROKU_CLIENT_SECRET
     })
   );
+  console.log('RESPONSE FROM HEROKU: ', herokuRes);
 
   const { access_token, expires_in, refresh_token, user_id } = herokuRes;
-  res.redirect(`${APP_URL}${AUTH_CALLBACK}?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`);
+  const redirectUrl = `${APP_URL}${AUTH_CALLBACK}?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
+  console.log(`Redirecting to: ${redirectUrl}`);
+  res.redirect('remoteku://auth/callback?access_token=dac05588-59e7-4f9d-aea9-53bbbe7bec9b&expires_in=28799&refresh_token=eb8b20ea-78cb-4169-baf1-a5b4e7018a3b&user_id=40325aaa-7333-47e1-9b9e-d0a0f64f4c93');
+});
+
+// iOS universal link aasa
+const aasa = fs.readFileSync(__dirname + '/static/apple-app-site-association');
+app.get('/apple-app-site-association', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  res.status(200).send(aasa);
 });
 
 app.listen(PORT, () => {
