@@ -1,4 +1,8 @@
 require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
 const {
   NODE_ENV,
   PORT,
@@ -7,11 +11,10 @@ const {
   HEROKU_CLIENT_ID,
   JWT_SECRET,
   AUTH_CALLBACK,
-  HEROKU_CLIENT_SECRET
+  HEROKU_CLIENT_SECRET,
 } = process.env;
-const express = require('express');
+
 const app = express();
-const bodyParser = require('body-parser');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const querystring = require('querystring');
@@ -20,6 +23,8 @@ const scopes = ['read', 'write'];
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(express.static('static'));
 
 app.get('/api/herokuauth', async (req, res) => {
   // Device id in query param
@@ -56,7 +61,7 @@ app.get(AUTH_CALLBACK, async (req, res) => {
 });
 
 // iOS universal link aasa
-const aasa = fs.readFileSync(__dirname + '/static/apple-app-site-association');
+const aasa = fs.readFileSync(`${__dirname}/static/apple-app-site-association`);
 app.get('/apple-app-site-association', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.status(200).send(aasa);
