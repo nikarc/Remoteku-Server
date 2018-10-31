@@ -24,8 +24,6 @@ const scopes = ['read', 'write'];
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static('static'));
-
 app.get('/', (req, res) => res.send('<p>Remoteku Server</p>'));
 
 app.get('/api/herokuauth', async (req, res) => {
@@ -65,8 +63,7 @@ app.get(AUTH_CALLBACK, async (req, res) => {
 // iOS universal link aasa
 const aasa = fs.readFileSync(`${__dirname}/static/apple-app-site-association`);
 app.get('/apple-app-site-association', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.status(200).send(aasa);
+  res.status(200).json(aasa);
 });
 
 app.listen(PORT, () => {
