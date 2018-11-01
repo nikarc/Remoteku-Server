@@ -55,9 +55,16 @@ app.get(AUTH_CALLBACK, async (req, res) => {
   console.log('RESPONSE FROM HEROKU: ', herokuRes);
 
   const { access_token, expires_in, refresh_token, user_id } = herokuRes;
-  const redirectUrl = `/?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
-  console.log(`Redirecting to: ${redirectUrl}`);
-  res.redirect(redirectUrl);
+  const redirectUrl = `/redirectToApp?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
+  const html = `
+    <a href="${redirectUrl}" style="opacity: 0;"></a>
+    <script>
+      var el = document.querySelector('a');
+      el.click();
+    </script>
+  `;
+
+  res.send(html);
 });
 
 // iOS universal link aasa
