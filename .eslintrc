@@ -3,7 +3,7 @@
       "ecmaVersion": 7,
   },
   "rules": {
-      "camelcase": 0
+      "camelCase": 0
   }
 }
 

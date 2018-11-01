@@ -55,9 +55,9 @@ app.get(AUTH_CALLBACK, async (req, res) => {
   console.log('RESPONSE FROM HEROKU: ', herokuRes);
 
   const { access_token, expires_in, refresh_token, user_id } = herokuRes;
-  const redirectUrl = `${APP_URL}${AUTH_CALLBACK}?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
+  const redirectUrl = `${AUTH_CALLBACK}?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
   console.log(`Redirecting to: ${redirectUrl}`);
-  res.redirect('remoteku://auth/callback?access_token=dac05588-59e7-4f9d-aea9-53bbbe7bec9b&expires_in=28799&refresh_token=eb8b20ea-78cb-4169-baf1-a5b4e7018a3b&user_id=40325aaa-7333-47e1-9b9e-d0a0f64f4c93');
+  res.redirect(redirectUrl);
 });
 
 // iOS universal link aasa
