@@ -1,9 +1,13 @@
 {
   "applinks": {
     "apps": [],
-    "details": [{
-      "appID": "39GX6UGC5E.com.nickarcuri.remoteku",
-      "paths": ["*"]
-    }]
+    "details": [
+      {
+        "appID": "39GX6UGC5E.com.nickarcuri.Remoteku",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
   }
 }

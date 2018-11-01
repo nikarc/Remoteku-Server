@@ -62,7 +62,6 @@ app.get(AUTH_CALLBACK, async (req, res) => {
 
 // iOS universal link aasa
 const aasa = JSON.parse(fs.readFileSync(`${__dirname}/static/apple-app-site-association`, 'utf-8'));
-// const aasa = require(`${__dirname}/static/apple-app-site-association`);
 app.get('/apple-app-site-association', (req, res) => {
   res.status(200).json(aasa);
 });
