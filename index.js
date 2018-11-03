@@ -58,6 +58,10 @@ app.get(AUTH_CALLBACK, async (req, res) => {
   const redirectUrl = `/redirectToApp?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
   const html = `
     <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
       .main {
         width: 100vw;
         height: 100vh;
@@ -74,10 +78,10 @@ app.get(AUTH_CALLBACK, async (req, res) => {
       <h3>Authorizing...</h3>
     </div>
     <script>
-      window.accessToken = '${access_token}';
-      window.refreshToken = '${refresh_token}';
-      window.expiresIn = '${expires_in}';
-      window.userId = '${user_id}';
+      window.HerokuAccessToken = '${access_token}';
+      window.HerokuRefreshToken = '${refresh_token}';
+      window.HerokuTokenExpires = '${expires_in}';
+      window.HerokuUserId = '${user_id}';
     </script>
   `;
 
