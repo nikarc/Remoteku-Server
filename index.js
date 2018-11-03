@@ -66,6 +66,8 @@ app.get(AUTH_CALLBACK, async (req, res) => {
         justify-content: center;
         align-items: center;
         font-family: 'Helvetica', 'sans-serif';
+        font-size: 3em;
+        color: white;
       }
     </style>
     <div class="main">
