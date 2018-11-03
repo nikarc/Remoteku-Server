@@ -57,12 +57,26 @@ app.get(AUTH_CALLBACK, async (req, res) => {
   const { access_token, expires_in, refresh_token, user_id } = herokuRes;
   const redirectUrl = `/redirectToApp?access_token=${access_token}&expires_in=${expires_in}&refresh_token=${refresh_token}&user_id=${user_id}`;
   const html = `
+    <style>
+      .main {
+        width: 100vw;
+        height: 100vh;
+        background-color: #8565AA;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Helvetica', 'sans-serif';
+      }
+    </style>
+    <div class="main">
+      <h3>Authorizing...</h3>
+    </div>
     <script>
       window.accessToken = '${access_token}';
       window.refreshToken = '${refresh_token}';
       window.expiresIn = '${expires_in}';
       window.userId = '${user_id}';
-    </script> 
+    </script>
   `;
 
   res.send(html);
